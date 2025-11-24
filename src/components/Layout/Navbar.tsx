@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
     <BootstrapNavbar bg="dark" variant="dark" expand="lg">
       <Container>
         <BootstrapNavbar.Brand as={Link} to="/">
-          📚 Библиотека
+          📚 Бібліотека
         </BootstrapNavbar.Brand>
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
             {isAuthenticated && (
               <>
                 <Nav.Link as={Link} to="/reservations">
-                  Мои бронирования
+                  Мої бронювання
                 </Nav.Link>
               </>
             )}
@@ -39,16 +39,16 @@ export const Navbar: React.FC = () => {
                   {user?.name} {user?.surname}
                 </BootstrapNavbar.Text>
                 <Button variant="outline-light" onClick={handleLogout}>
-                  Выйти
+                  Вийти
                 </Button>
               </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/login">
-                  Вход
+                  Вхід
                 </Nav.Link>
                 <Nav.Link as={Link} to="/register">
-                  Регистрация
+                  Реєстрація
                 </Nav.Link>
               </>
             )}

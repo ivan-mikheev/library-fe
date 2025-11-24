@@ -20,8 +20,8 @@ export const ReservationsList: React.FC = () => {
       const data = await apiClient.getMyReservations(statusFilter);
       setReservations(data);
     } catch (err: any) {
-      setError('Ошибка загрузки бронирований. Попробуйте обновить страницу.');
-      console.error('Ошибка загрузки бронирований:', err);
+      setError('Помилка завантаження бронювань. Спробуйте оновити сторінку.');
+      console.error('Помилка завантаження бронювань:', err);
     } finally {
       setIsLoading(false);
     }
@@ -42,19 +42,19 @@ export const ReservationsList: React.FC = () => {
 
   return (
     <Container className="mt-4">
-      <h1 className="mb-4">Мои бронирования</h1>
+      <h1 className="mb-4">Мої бронювання</h1>
 
       <Card className="mb-4">
         <Card.Body>
           <Form.Group>
-            <Form.Label>Фильтр по статусу</Form.Label>
+            <Form.Label>Фільтр за статусом</Form.Label>
             <Form.Select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
             >
-              <option value="active">Активные</option>
-              <option value="completed">Завершенные</option>
-              <option value="cancelled">Отмененные</option>
+              <option value="active">Активні</option>
+              <option value="completed">Завершені</option>
+              <option value="cancelled">Скасовані</option>
             </Form.Select>
           </Form.Group>
         </Card.Body>
@@ -65,11 +65,11 @@ export const ReservationsList: React.FC = () => {
       {isLoading ? (
         <div className="text-center py-5">
           <Spinner animation="border" role="status">
-            <span className="visually-hidden">Загрузка...</span>
+            <span className="visually-hidden">Завантаження...</span>
           </Spinner>
         </div>
       ) : reservations.length === 0 ? (
-        <Alert variant="info">Бронирования не найдены</Alert>
+        <Alert variant="info">Бронювання не знайдені</Alert>
       ) : (
         <Card>
           <Card.Body>
@@ -78,17 +78,17 @@ export const ReservationsList: React.FC = () => {
                 <tr>
                   <th>Книга</th>
                   <th>Автор</th>
-                  <th>Дата начала</th>
-                  <th>Дата окончания</th>
+                  <th>Дата початку</th>
+                  <th>Дата завершення</th>
                   <th>Статус</th>
-                  <th>Дата создания</th>
+                  <th>Дата створення</th>
                 </tr>
               </thead>
               <tbody>
                 {reservations.map((reservation) => (
                   <tr key={reservation.id}>
-                    <td>{reservation.book?.title || 'Неизвестно'}</td>
-                    <td>{reservation.book?.author || 'Неизвестно'}</td>
+                    <td>{reservation.book?.title || 'Невідомо'}</td>
+                    <td>{reservation.book?.author || 'Невідомо'}</td>
                     <td>{formatDate(reservation.start_date)}</td>
                     <td>{formatDate(reservation.end_date)}</td>
                     <td>{getStatusBadge(reservation.status)}</td>

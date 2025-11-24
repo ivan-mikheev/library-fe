@@ -22,7 +22,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
         )}
         <Card.Text className="mt-2">
           <small className="text-muted">
-            Доступно экземпляров: <strong>{book.available_copies}</strong>
+            Доступно екземплярів: <strong>{book.available_copies}</strong>
           </small>
         </Card.Text>
         <Button
@@ -30,7 +30,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
           onClick={() => navigate(`/books/${book.id}`)}
           className="w-100"
         >
-          Подробнее
+          Більше інформації
         </Button>
       </Card.Body>
     </Card>

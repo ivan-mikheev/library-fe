@@ -10,7 +10,8 @@ import type {
   ReservationResponse,
 } from '../types/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+// Using proxy Vite to avoid CORS problems
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 class ApiClient {
   private client: AxiosInstance;
@@ -23,7 +24,7 @@ class ApiClient {
       },
     });
 
-    // Добавляем токен в заголовки при наличии
+    // Adding token to headers if it exists
     this.client.interceptors.request.use((config) => {
       const token = localStorage.getItem('access_token');
       if (token && config.headers) {
@@ -32,7 +33,7 @@ class ApiClient {
       return config;
     });
 
-    // Обработка ошибок
+    // Error handling
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError) => {

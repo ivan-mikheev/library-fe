@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
     <footer className="bg-light mt-auto py-4">
       <Container>
         <p className="text-center text-muted mb-0">
-          © 2025 Библиотека. Система управления библиотекой.
+          © 2025 Бібліотека. Система управління.
         </p>
       </Container>
     </footer>

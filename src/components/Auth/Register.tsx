@@ -39,7 +39,7 @@ export const Register: React.FC = () => {
       if (Array.isArray(errorMessage)) {
         setError(errorMessage.map((e: any) => e.msg).join(', '));
       } else {
-        setError(errorMessage || 'Ошибка регистрации. Попробуйте снова.');
+        setError(errorMessage || 'Помилка реєстрації. Спробуйте знов.');
       }
     } finally {
       setIsLoading(false);
@@ -50,7 +50,7 @@ export const Register: React.FC = () => {
     <Container className="mt-5" style={{ maxWidth: '500px' }}>
       <Card>
         <Card.Body>
-          <Card.Title className="text-center mb-4">Регистрация</Card.Title>
+          <Card.Title className="text-center mb-4">Реєстрація</Card.Title>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
@@ -58,7 +58,7 @@ export const Register: React.FC = () => {
               <Form.Control
                 type="email"
                 name="email"
-                placeholder="Введите email"
+                placeholder="Введіть email"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -69,29 +69,29 @@ export const Register: React.FC = () => {
               <Form.Control
                 type="password"
                 name="password"
-                placeholder="Введите пароль"
+                placeholder="Введіть пароль"
                 value={formData.password}
                 onChange={handleChange}
                 required
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Имя *</Form.Label>
+              <Form.Label>Ім'я *</Form.Label>
               <Form.Control
                 type="text"
                 name="name"
-                placeholder="Введите имя"
+                placeholder="Введіть ім'я"
                 value={formData.name}
                 onChange={handleChange}
                 required
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Фамилия *</Form.Label>
+              <Form.Label>Прізвище *</Form.Label>
               <Form.Control
                 type="text"
                 name="surname"
-                placeholder="Введите фамилию"
+                placeholder="Введіть прізвище"
                 value={formData.surname}
                 onChange={handleChange}
                 required
@@ -102,17 +102,17 @@ export const Register: React.FC = () => {
               <Form.Control
                 type="tel"
                 name="phone"
-                placeholder="Введите телефон (необязательно)"
+                placeholder="Введіть телефон (необов'язково)"
                 value={formData.phone}
                 onChange={handleChange}
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="w-100" disabled={isLoading}>
-              {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
+              {isLoading ? 'Реєстрація...' : 'Зареєструватися'}
             </Button>
           </Form>
           <div className="text-center mt-3">
-            <Link to="/login">Уже есть аккаунт? Войти</Link>
+            <Link to="/login">Є аккаунт? Увійти</Link>
           </div>
         </Card.Body>
       </Card>

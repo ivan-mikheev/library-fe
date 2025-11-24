@@ -24,7 +24,7 @@ export const BookList: React.FC = () => {
       const data = await apiClient.getCategories();
       setCategories(data);
     } catch (err) {
-      console.error('Ошибка загрузки категорий:', err);
+      console.error('Помилка завантаження категорій:', err);
     }
   };
 
@@ -38,8 +38,8 @@ export const BookList: React.FC = () => {
       });
       setBooks(data);
     } catch (err: any) {
-      setError('Ошибка загрузки книг. Попробуйте обновить страницу.');
-      console.error('Ошибка загрузки книг:', err);
+      setError('Помилка завантаження книг. Спробуйте оновити сторінку.');
+      console.error('Помилка завантаження книг:', err);
     } finally {
       setIsLoading(false);
     }
@@ -52,14 +52,14 @@ export const BookList: React.FC = () => {
       <Row className="mb-4">
         <Col md={4}>
           <Form.Group>
-            <Form.Label>Фильтр по категории</Form.Label>
+            <Form.Label>Фільтр по категорії</Form.Label>
             <Form.Select
               value={selectedCategory || ''}
               onChange={(e) =>
                 setSelectedCategory(e.target.value ? parseInt(e.target.value) : null)
               }
             >
-              <option value="">Все категории</option>
+              <option value="">Всі категорії</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -75,11 +75,11 @@ export const BookList: React.FC = () => {
       {isLoading ? (
         <div className="text-center py-5">
           <Spinner animation="border" role="status">
-            <span className="visually-hidden">Загрузка...</span>
+            <span className="visually-hidden">Завантаження...</span>
           </Spinner>
         </div>
       ) : books.length === 0 ? (
-        <Alert variant="info">Книги не найдены</Alert>
+        <Alert variant="info">Книги не знайдені</Alert>
       ) : (
         <Row>
           {books.map((book) => (

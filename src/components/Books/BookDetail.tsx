@@ -28,8 +28,8 @@ export const BookDetail: React.FC = () => {
       const data = await apiClient.getBook(parseInt(id!));
       setBook(data);
     } catch (err: any) {
-      setError('Ошибка загрузки книги. Попробуйте обновить страницу.');
-      console.error('Ошибка загрузки книги:', err);
+      setError('Помилка завантаження книги. Спробуйте оновити сторінку.');
+      console.error('Помилка завантаження книги:', err);
     } finally {
       setIsLoading(false);
     }
@@ -37,14 +37,14 @@ export const BookDetail: React.FC = () => {
 
   const handleReservationSuccess = () => {
     setShowReservationModal(false);
-    loadBook(); // Обновляем информацию о книге
+    loadBook(); // Оновлюємо інформацію про книгу
   };
 
   if (isLoading) {
     return (
       <Container className="mt-5 text-center">
         <Spinner animation="border" role="status">
-          <span className="visually-hidden">Загрузка...</span>
+          <span className="visually-hidden">Завантаження...</span>
         </Spinner>
       </Container>
     );
@@ -53,9 +53,9 @@ export const BookDetail: React.FC = () => {
   if (error || !book) {
     return (
       <Container className="mt-5">
-        <Alert variant="danger">{error || 'Книга не найдена'}</Alert>
+        <Alert variant="danger">{error || 'Книга не знайдена'}</Alert>
         <Button variant="secondary" onClick={() => navigate('/')}>
-          Вернуться к каталогу
+          Повернутися до каталогу
         </Button>
       </Container>
     );
@@ -64,7 +64,7 @@ export const BookDetail: React.FC = () => {
   return (
     <Container className="mt-4">
       <Button variant="outline-secondary" onClick={() => navigate('/')} className="mb-3">
-        ← Назад к каталогу
+        ← Назад до каталогу
       </Button>
 
       <Card>
@@ -81,7 +81,7 @@ export const BookDetail: React.FC = () => {
             </div>
             {isAuthenticated && book.available_copies > 0 && (
               <Button variant="success" onClick={() => setShowReservationModal(true)}>
-                Забронировать
+                Забронювати
               </Button>
             )}
           </div>
@@ -89,7 +89,7 @@ export const BookDetail: React.FC = () => {
           <hr />
 
           <div className="mb-3">
-            <h5>Информация о книге</h5>
+            <h5>Інформація про книгу</h5>
             {book.isbn && (
               <p>
                 <strong>ISBN:</strong> {book.isbn}
@@ -97,15 +97,15 @@ export const BookDetail: React.FC = () => {
             )}
             {book.description && (
               <div>
-                <strong>Описание:</strong>
+                <strong>Опис:</strong>
                 <p>{book.description}</p>
               </div>
             )}
             <p>
-              <strong>Всего экземпляров:</strong> {book.total_copies}
+              <strong>Всього екземплярів:</strong> {book.total_copies}
             </p>
             <p>
-              <strong>Доступно экземпляров:</strong>{' '}
+              <strong>Доступно екземплярів:</strong>{' '}
               <Badge bg={book.available_copies > 0 ? 'success' : 'danger'}>
                 {book.available_copies}
               </Badge>

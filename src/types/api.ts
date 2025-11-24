@@ -1,4 +1,4 @@
-// Типы данных на основе OpenAPI спецификации
+// Types based on OpenAPI specification
 
 export interface UserCreate {
   email: string;

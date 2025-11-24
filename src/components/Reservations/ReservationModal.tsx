@@ -22,7 +22,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Устанавливаем минимальную дату на сегодня
+  // Set minimum date to today
   const today = new Date().toISOString().split('T')[0];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,7 +42,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
       if (Array.isArray(errorMessage)) {
         setError(errorMessage.map((e: any) => e.msg).join(', '));
       } else {
-        setError(errorMessage || 'Ошибка создания бронирования. Попробуйте снова.');
+        setError(errorMessage || 'Помилка створення бронювання. Спробуйте знов.');
       }
     } finally {
       setIsLoading(false);
@@ -52,7 +52,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Бронирование книги</Modal.Title>
+        <Modal.Title>Бронювання книги</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
@@ -61,7 +61,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
           </p>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group className="mb-3">
-            <Form.Label>Дата начала бронирования *</Form.Label>
+            <Form.Label>Дата початку бронювання *</Form.Label>
             <Form.Control
               type="date"
               value={startDate}
@@ -71,7 +71,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Количество дней (по умолчанию 5)</Form.Label>
+            <Form.Label>Кількість днів (за замовчуванням 5)</Form.Label>
             <Form.Control
               type="number"
               min="1"
@@ -83,10 +83,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
-            Отмена
+            Скасувати
           </Button>
           <Button variant="primary" type="submit" disabled={isLoading}>
-            {isLoading ? 'Создание...' : 'Забронировать'}
+            {isLoading ? 'Створення...' : 'Забронювати'}
           </Button>
         </Modal.Footer>
       </Form>
