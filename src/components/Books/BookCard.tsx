@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Badge, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import type { BookListResponse } from '../../types/api';
 
 interface BookCardProps {
@@ -9,6 +10,7 @@ interface BookCardProps {
 
 export const BookCard: React.FC<BookCardProps> = ({ book }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Card className="h-100">
@@ -22,7 +24,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
         )}
         <Card.Text className="mt-2">
           <small className="text-muted">
-            Доступно екземплярів: <strong>{book.available_copies}</strong>
+            {t('books.card.availableCopies')}: <strong>{book.available_copies}</strong>
           </small>
         </Card.Text>
         <Button
@@ -30,7 +32,7 @@ export const BookCard: React.FC<BookCardProps> = ({ book }) => {
           onClick={() => navigate(`/books/${book.id}`)}
           className="w-100"
         >
-          Більше інформації
+          {t('books.card.moreInfo')}
         </Button>
       </Card.Body>
     </Card>

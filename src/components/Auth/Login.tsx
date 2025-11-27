@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const Login: React.FC = () => {
@@ -10,6 +11,7 @@ export const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,9 +26,11 @@ export const Login: React.FC = () => {
       console.error('Login error:', err);
       
       // Handle different error response formats
-      let errorMessage = 'Помилка входу. Перевірьте дані.';
+      let errorMessage = t('auth.login.error');
       
-      if (err.response?.data) {
+      if (err.code === 'ERR_NETWORK' || err.message === 'Network Error') {
+        errorMessage = t('auth.login.networkError');
+      } else if (err.response?.data) {
         // Try different possible error formats
         errorMessage = 
           err.response.data.detail || 
@@ -49,35 +53,35 @@ export const Login: React.FC = () => {
     <Container className="mt-5" style={{ maxWidth: '400px' }}>
       <Card>
         <Card.Body>
-          <Card.Title className="text-center mb-4">Вхід в систему</Card.Title>
+          <Card.Title className="text-center mb-4">{t('auth.login.title')}</Card.Title>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>{t('auth.login.email')}</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Введіть email"
+                placeholder={t('auth.login.emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Пароль</Form.Label>
+              <Form.Label>{t('auth.login.password')}</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Введіть пароль"
+                placeholder={t('auth.login.passwordPlaceholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="w-100" disabled={isLoading}>
-              {isLoading ? 'Вхід...' : 'Увійти'}
+              {isLoading ? t('auth.login.submitting') : t('auth.login.submit')}
             </Button>
           </Form>
           <div className="text-center mt-3">
-            <Link to="/register">Немає аккаунту? Зареєструватися</Link>
+            <Link to="/register">{t('auth.login.noAccount')}</Link>
           </div>
         </Card.Body>
       </Card>

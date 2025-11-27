@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Spinner, Alert, Button, Badge } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../api/client';
 import { useAuth } from '../../contexts/AuthContext';
 import type { BookResponse } from '../../types/api';
@@ -10,6 +11,7 @@ export const BookDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   const [book, setBook] = useState<BookResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -28,8 +30,8 @@ export const BookDetail: React.FC = () => {
       const data = await apiClient.getBook(parseInt(id!));
       setBook(data);
     } catch (err: any) {
-      setError('Помилка завантаження книги. Спробуйте оновити сторінку.');
-      console.error('Помилка завантаження книги:', err);
+      setError(t('books.detail.error'));
+      console.error('Error loading book:', err);
     } finally {
       setIsLoading(false);
     }
@@ -44,7 +46,7 @@ export const BookDetail: React.FC = () => {
     return (
       <Container className="mt-5 text-center">
         <Spinner animation="border" role="status">
-          <span className="visually-hidden">Завантаження...</span>
+          <span className="visually-hidden">{t('common.loading')}</span>
         </Spinner>
       </Container>
     );
@@ -53,9 +55,9 @@ export const BookDetail: React.FC = () => {
   if (error || !book) {
     return (
       <Container className="mt-5">
-        <Alert variant="danger">{error || 'Книга не знайдена'}</Alert>
+        <Alert variant="danger">{error || t('books.detail.notFound')}</Alert>
         <Button variant="secondary" onClick={() => navigate('/')}>
-          Повернутися до каталогу
+          {t('books.detail.backToCatalog')}
         </Button>
       </Container>
     );
@@ -64,7 +66,7 @@ export const BookDetail: React.FC = () => {
   return (
     <Container className="mt-4">
       <Button variant="outline-secondary" onClick={() => navigate('/')} className="mb-3">
-        ← Назад до каталогу
+        {t('books.detail.back')}
       </Button>
 
       <Card>
@@ -81,7 +83,7 @@ export const BookDetail: React.FC = () => {
             </div>
             {isAuthenticated && book.available_copies > 0 && (
               <Button variant="success" onClick={() => setShowReservationModal(true)}>
-                Забронювати
+                {t('books.detail.reserve')}
               </Button>
             )}
           </div>
@@ -89,23 +91,23 @@ export const BookDetail: React.FC = () => {
           <hr />
 
           <div className="mb-3">
-            <h5>Інформація про книгу</h5>
+            <h5>{t('books.detail.bookInfo')}</h5>
             {book.isbn && (
               <p>
-                <strong>ISBN:</strong> {book.isbn}
+                <strong>{t('books.detail.isbn')}:</strong> {book.isbn}
               </p>
             )}
             {book.description && (
               <div>
-                <strong>Опис:</strong>
+                <strong>{t('books.detail.description')}:</strong>
                 <p>{book.description}</p>
               </div>
             )}
             <p>
-              <strong>Всього екземплярів:</strong> {book.total_copies}
+              <strong>{t('books.detail.totalCopies')}:</strong> {book.total_copies}
             </p>
             <p>
-              <strong>Доступно екземплярів:</strong>{' '}
+              <strong>{t('books.detail.availableCopies')}:</strong>{' '}
               <Badge bg={book.available_copies > 0 ? 'success' : 'danger'}>
                 {book.available_copies}
               </Badge>

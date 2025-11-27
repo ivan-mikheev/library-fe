@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, Alert } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../api/client';
 
 interface ReservationModalProps {
@@ -21,6 +22,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
   const [days, setDays] = useState(5);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   // Set minimum date to today
   const today = new Date().toISOString().split('T')[0];
@@ -42,7 +44,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
       if (Array.isArray(errorMessage)) {
         setError(errorMessage.map((e: any) => e.msg).join(', '));
       } else {
-        setError(errorMessage || 'Помилка створення бронювання. Спробуйте знов.');
+        setError(errorMessage || t('reservations.modal.error'));
       }
     } finally {
       setIsLoading(false);
@@ -52,16 +54,16 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Бронювання книги</Modal.Title>
+        <Modal.Title>{t('reservations.modal.title')}</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
           <p>
-            <strong>Книга:</strong> {bookTitle}
+            <strong>{t('reservations.modal.book')}:</strong> {bookTitle}
           </p>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group className="mb-3">
-            <Form.Label>Дата початку бронювання *</Form.Label>
+            <Form.Label>{t('reservations.modal.startDate')} *</Form.Label>
             <Form.Control
               type="date"
               value={startDate}
@@ -71,7 +73,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Кількість днів (за замовчуванням 5)</Form.Label>
+            <Form.Label>{t('reservations.modal.days')}</Form.Label>
             <Form.Control
               type="number"
               min="1"
@@ -83,10 +85,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
-            Скасувати
+            {t('reservations.modal.cancel')}
           </Button>
           <Button variant="primary" type="submit" disabled={isLoading}>
-            {isLoading ? 'Створення...' : 'Забронювати'}
+            {isLoading ? t('reservations.modal.submitting') : t('reservations.modal.submit')}
           </Button>
         </Modal.Footer>
       </Form>

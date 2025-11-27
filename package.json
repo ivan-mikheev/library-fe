@@ -4,19 +4,21 @@
   "description": "Library Management Frontend Application",
   "private": true,
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.0",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
-    "react-bootstrap": "^2.9.1"
+    "i18next": "^25.6.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^16.3.5",
+    "react-router-dom": "^6.20.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.8",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8"
   },
   "scripts": {
     "dev": "vite",
@@ -24,4 +26,3 @@
     "preview": "vite preview"
   }
 }
-

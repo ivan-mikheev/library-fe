@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Spinner, Alert } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../api/client';
 import type { BookListResponse, CategoryResponse } from '../../types/api';
 import { BookCard } from './BookCard';
@@ -10,6 +11,7 @@ export const BookList: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     loadCategories();
@@ -24,7 +26,7 @@ export const BookList: React.FC = () => {
       const data = await apiClient.getCategories();
       setCategories(data);
     } catch (err) {
-      console.error('Помилка завантаження категорій:', err);
+      console.error('Error loading categories:', err);
     }
   };
 
@@ -38,8 +40,8 @@ export const BookList: React.FC = () => {
       });
       setBooks(data);
     } catch (err: any) {
-      setError('Помилка завантаження книг. Спробуйте оновити сторінку.');
-      console.error('Помилка завантаження книг:', err);
+      setError(t('books.catalog.error'));
+      console.error('Error loading books:', err);
     } finally {
       setIsLoading(false);
     }
@@ -47,19 +49,19 @@ export const BookList: React.FC = () => {
 
   return (
     <Container className="mt-4">
-      <h1 className="mb-4">Каталог книг</h1>
+      <h1 className="mb-4">{t('books.catalog.title')}</h1>
 
       <Row className="mb-4">
         <Col md={4}>
           <Form.Group>
-            <Form.Label>Фільтр по категорії</Form.Label>
+            <Form.Label>{t('books.catalog.categoryFilter')}</Form.Label>
             <Form.Select
               value={selectedCategory || ''}
               onChange={(e) =>
                 setSelectedCategory(e.target.value ? parseInt(e.target.value) : null)
               }
             >
-              <option value="">Всі категорії</option>
+              <option value="">{t('books.catalog.allCategories')}</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -75,11 +77,11 @@ export const BookList: React.FC = () => {
       {isLoading ? (
         <div className="text-center py-5">
           <Spinner animation="border" role="status">
-            <span className="visually-hidden">Завантаження...</span>
+            <span className="visually-hidden">{t('books.catalog.loading')}</span>
           </Spinner>
         </div>
       ) : books.length === 0 ? (
-        <Alert variant="info">Книги не знайдені</Alert>
+        <Alert variant="info">{t('books.catalog.notFound')}</Alert>
       ) : (
         <Row>
           {books.map((book) => (

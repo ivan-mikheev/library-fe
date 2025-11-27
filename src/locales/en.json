@@ -1,0 +1,108 @@
+{
+  "navbar": {
+    "brand": "📚 Library",
+    "catalog": "Book Catalog",
+    "reservations": "My Reservations",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "emailPlaceholder": "Enter email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "submit": "Login",
+      "submitting": "Logging in...",
+      "noAccount": "No account? Register",
+      "error": "Login error. Check your data.",
+      "networkError": "Network error. Check CORS server settings or make sure the server is running."
+    },
+    "register": {
+      "title": "Registration",
+      "email": "Email",
+      "emailPlaceholder": "Enter email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "name": "First Name",
+      "namePlaceholder": "Enter first name",
+      "surname": "Last Name",
+      "surnamePlaceholder": "Enter last name",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter phone (optional)",
+      "submit": "Register",
+      "submitting": "Registering...",
+      "hasAccount": "Have an account? Login",
+      "error": "Registration error. Try again."
+    }
+  },
+  "books": {
+    "catalog": {
+      "title": "Book Catalog",
+      "categoryFilter": "Filter by Category",
+      "allCategories": "All Categories",
+      "loading": "Loading...",
+      "notFound": "Books not found",
+      "error": "Error loading books. Try refreshing the page."
+    },
+    "card": {
+      "availableCopies": "Available copies",
+      "moreInfo": "More Information"
+    },
+    "detail": {
+      "back": "← Back to Catalog",
+      "reserve": "Reserve",
+      "bookInfo": "Book Information",
+      "isbn": "ISBN",
+      "description": "Description",
+      "totalCopies": "Total copies",
+      "availableCopies": "Available copies",
+      "notFound": "Book not found",
+      "error": "Error loading book. Try refreshing the page.",
+      "backToCatalog": "Back to Catalog"
+    }
+  },
+  "reservations": {
+    "list": {
+      "title": "My Reservations",
+      "statusFilter": "Filter by Status",
+      "active": "Active",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "loading": "Loading...",
+      "notFound": "Reservations not found",
+      "error": "Error loading reservations. Try refreshing the page.",
+      "table": {
+        "book": "Book",
+        "author": "Author",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "status": "Status",
+        "createdAt": "Created At"
+      },
+      "unknown": "Unknown"
+    },
+    "modal": {
+      "title": "Book Reservation",
+      "book": "Book",
+      "startDate": "Reservation Start Date",
+      "days": "Number of Days (default 5)",
+      "cancel": "Cancel",
+      "submit": "Reserve",
+      "submitting": "Creating...",
+      "error": "Error creating reservation. Try again.",
+      "success": "Reservation created successfully!"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Not Found"
+  },
+  "footer": {
+    "copyright": "© 2025 Library. Management System."
+  }
+}
+
